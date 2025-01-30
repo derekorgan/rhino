@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Workout & Music Tracker</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; padding: 20px; }
+        h1 { color: #333; }
+        .container { display: flex; gap: 20px; flex-wrap: wrap; }
+        .box { padding: 15px; border: 1px solid #ddd; border-radius: 8px; flex: 1; min-width: 300px; }
+    </style>
+</head>
+<body>
+    <h1>Workout & Music Tracker</h1>
+
+    <div class="box">
+        <h2>💡 AI Workout Summary</h2>
+        <p>{{ ai_summary }}</p>
+    </div>
+
+    <div class="container">
+        <div class="box">
+            <h2>🏃 Strava Activities</h2>
+            <ul>
+                {% for activity in activities %}
+                    <li>
+                        <strong>{{ activity.name }}</strong> - {{ activity.type }}
+                        <br>Distance: {{ (activity.distance / 1000) | round(2) }} km
+                        <br>Start Time: {{ activity.start_date }}
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+
+        <div class="box">
+            <h2>🎵 Recently Played Spotify Tracks</h2>
+            <ul>
+                {% for track in tracks %}
+                    <li>
+                        <strong>{{ track.name }}</strong> by {{ track.artist }}
+                        <br>Played at: {{ track.played_at }}
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+</body>
+</html>
