@@ -2,6 +2,11 @@ import requests
 import os
 import json
 from datetime import datetime
+from dotenv import load_dotenv
+
+# Load environment variables
+load_dotenv()
+
 
 # Load Strava credentials from environment variables
 STRAVA_CLIENT_ID = os.getenv("STRAVA_CLIENT_ID")
