@@ -3,16 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Workout & Music Tracker</title>
-    <style>
-        body { font-family: Arial, sans-serif; margin: 20px; padding: 20px; }
-        h1 { color: #333; }
-        .container { display: flex; gap: 20px; flex-wrap: wrap; }
-        .box { padding: 15px; border: 1px solid #ddd; border-radius: 8px; flex: 1; min-width: 300px; }
-    </style>
+    <title>Rhino Personal Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
 </head>
 <body>
-    <h1>Workout & Music Tracker</h1>
+
+    <!-- Logo at the top of the page -->
+    <div class="logo-container">
+        <img src="{{ url_for('static', filename='images/rhino_app_icon.jpg') }}" alt="Dashboard Logo" class="logo">
+    </div>
+    
+    <h1>Rhino Workout & Music Tracker</h1>
 
     <div class="box">
         <h2>💡 AI Workout Summary</h2>

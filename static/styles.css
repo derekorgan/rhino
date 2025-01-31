@@ -1,0 +1,14 @@
+.logo-container {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.logo {
+    width: 150px; /* Adjust size */
+    height: auto;
+}
+
+body { font-family: Arial, sans-serif; margin: 20px; padding: 20px; }
+h1 { color: #333; }
+.container { display: flex; gap: 20px; flex-wrap: wrap; }
+.box { padding: 15px; border: 1px solid #ddd; border-radius: 8px; flex: 1; min-width: 300px; }
