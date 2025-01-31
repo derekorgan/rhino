@@ -60,6 +60,8 @@ SPOTIFY_CLIENT_ID="your-spotify-client-id"
 SPOTIFY_CLIENT_SECRET="your-spotify-client-secret"
 SPOTIFY_REDIRECT_URI="http://localhost:5000/callback"
 
+# Chess.com API username
+CHESS_USERNAME = "your-username"
 
 ```
 
