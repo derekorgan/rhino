@@ -3,9 +3,9 @@
   <img src="https://raw.githubusercontent.com/derekorgan/rhino/main/static/images/rhino_app_icon.jpg" width="150" alt="Rhino Dashboard Logo">
 </p>
 
-# 🏠 Rhino Personal Dashboard
-
-A customizable personal dashboard integrating **Strava, Spotify, and OpenAI**, with plans for more widgets in the future.
+# 🏠 Rhino Personal Dashboard Playground
+ 
+A customizable personal dashboard integrating **Strava, Spotify, and OpenAI**, with plans for more widgets in the future. 
 
 ## 🚀 Features
 
