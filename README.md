@@ -1,4 +1,4 @@
-# 🏠 Personal Dashboard
+# 🏠 Rhino Personal Dashboard
 
 A customizable personal dashboard integrating **Strava, Spotify, and OpenAI**, with plans for more widgets in the future.
 
@@ -13,8 +13,8 @@ A customizable personal dashboard integrating **Strava, Spotify, and OpenAI**, w
 ### 📅 Clone the Repository
 
 ```sh
-git clone git@github.com:derekorgan/rinho.git
-cd rinho
+git clone git@github.com:derekorgan/rhino.git
+cd rhino
 ```
 
 ### 📦 Install Dependencies
