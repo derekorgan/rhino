@@ -47,5 +47,36 @@
             </ul>
         </div>
     </div>
+
+    <div class="dashboard-section">
+        <h2>♟️ Chess.com Profile & Insights</h2>
+    
+        <div class="info-box">
+            <h3>{{ chess_profile.username }}</h3>
+            <p><strong>Joined:</strong> {{ chess_profile.joined | default("N/A") }}</p>
+            <p><strong>Blitz Rating:</strong> {{ chess_stats.chess_blitz.last.rating | default("N/A") }}</p>
+            <p><strong>Rapid Rating:</strong> {{ chess_stats.chess_rapid.last.rating | default("N/A") }}</p>
+            <p><strong>Bullet Rating:</strong> {{ chess_stats.chess_bullet.last.rating | default("N/A") }}</p>
+            <p><strong>Total Games Played:</strong> 
+                {{ chess_stats.chess_blitz.record.win + chess_stats.chess_blitz.record.loss + chess_stats.chess_blitz.record.draw +
+                   chess_stats.chess_rapid.record.win + chess_stats.chess_rapid.record.loss + chess_stats.chess_rapid.record.draw +
+                   chess_stats.chess_bullet.record.win + chess_stats.chess_bullet.record.loss + chess_stats.chess_bullet.record.draw | default("N/A") }}
+              </p>
+        </div>
+    
+        <div class="info-box">
+            <h3>🔍 AI Chess Insights</h3>
+            <p>{{ chess_analysis }}</p>
+        </div>
+    
+        <div class="info-box">
+            <h3>⏳ Recent Games</h3>
+            <ul>
+                {% for game in chess_games %}
+                    <li><strong>{{ game.time_class.capitalize() }}</strong>: {{ game.white.username }} vs {{ game.black.username }} - Result: {{ game.white.result }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
 </body>
 </html>

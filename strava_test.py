@@ -2,6 +2,9 @@ import requests
 import os
 import json
 
+# Load environment variables
+load_dotenv()
+
 # Load Strava credentials from environment variables
 STRAVA_CLIENT_ID = os.getenv("STRAVA_CLIENT_ID")
 STRAVA_CLIENT_SECRET = os.getenv("STRAVA_CLIENT_SECRET")
