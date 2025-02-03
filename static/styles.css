@@ -28,3 +28,24 @@ h1 { color: #333; }
     background: white;
     margin-bottom: 15px;
 }
+
+.ai-text {
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    font-family: inherit;
+    line-height: 1.5;
+    padding: 15px;
+    max-width: 100%;
+    overflow-x: auto;
+}
+
+.activity-tracks {
+    margin-top: 5px;
+    margin-left: 20px;
+    font-size: 0.9em;
+    color: #666;
+}
+
+.activity-tracks li {
+    margin: 3px 0;
+}
