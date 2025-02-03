@@ -1,3 +1,8 @@
+# Rhino Workout & Music Tracker (Playground experiment app) 🦏
+
+A Flask web application that integrates with Strava, Spotify, and OpenAI to track workouts, music, and with AI-powered insights using OpenAI.
+
+## Project Structure
 
 <p align="center">
   <img src="https://raw.githubusercontent.com/derekorgan/rhino/main/static/images/rhino_app_icon.jpg" width="150" alt="Rhino Dashboard Logo">
@@ -60,7 +65,7 @@ SPOTIFY_CLIENT_ID="your-spotify-client-id"
 SPOTIFY_CLIENT_SECRET="your-spotify-client-secret"
 SPOTIFY_REDIRECT_URI="http://localhost:5000/callback"
 
-# Chess.com API username
+# Chess.com API username (optional)  - currently commented out in app.py
 CHESS_USERNAME = "your-username"
 
 ```
@@ -122,7 +127,7 @@ Then open [**http://127.0.0.1:5000**](http://127.0.0.1:5000) in your browser.
 
 ## 📀 Next Steps
 
-- 💪 Set up Withings API for weight tracking
+- 💪 Set up Withings API / Dartcounter for weight tracking and darts
 - 🌟 Add more widgets (Calendar, Health, Finance, etc.)
 - 🤖 Improve AI insights
 
