@@ -143,6 +143,112 @@ This project is for **personal use** but can be extended collaboratively.
 
 - **Derek Organ**
 
+## Prerequisites
+
+- Python 3.8 or higher
+- Strava API credentials
+- Spotify Developer account and API credentials
+- Chess.com account (optional) - currently commented out in app.py
+- OpenAI API key
+
+## Installation
+
+1. Clone the repository:
+```bash
+git clone https://github.com/yourusername/rhino.git
+cd rhino
+```
+
+2. Create and activate a virtual environment:
+```bash
+python3 -m venv venv
+source venv/bin/activate  # On Windows: venv\Scripts\activate
+```
+
+3. Install dependencies:
+```bash
+pip install -r requirements.txt
+```
+
+## Configuration
+
+Create a `.env` file in the root directory with your API credentials:
+
+```env
+# Strava API Credentials
+STRAVA_CLIENT_ID=your_client_id
+STRAVA_CLIENT_SECRET=your_client_secret
+STRAVA_REFRESH_TOKEN=your_refresh_token
+
+# Spotify API Credentials
+SPOTIFY_CLIENT_ID=your_client_id
+SPOTIFY_CLIENT_SECRET=your_client_secret
+SPOTIFY_REDIRECT_URI=your_redirect_uri
+
+# Chess.com Username
+CHESS_USERNAME=your_username
+
+# OpenAI API Key
+OPENAI_API_KEY=your_api_key
+```
+
+## Running the Application
+
+1. Ensure your virtual environment is activated
+2. Run the Flask application:
+```bash
+python3 app.py
+```
+3. Visit `http://localhost:5000` in your web browser
+
+## Development
+
+### Project Organization
+- Each integration is modular and contained in its own directory
+- Configuration is centralized in `config.py`
+- Template filters in `utils/filters.py` handle date formatting and track selection
+- Static assets and templates are separated for clean organization
+
+### Adding New Features
+1. Create new integration directories as needed
+2. Update `config.py` with any new API credentials
+3. Add new routes to `app.py`
+4. Create corresponding templates in the `templates` directory
+
+## Dependencies
+
+- Flask: Web framework
+- Requests: HTTP client for API calls
+- Python-dotenv: Environment variable management
+- Spotipy: Spotify API client
+- OpenAI: AI integration
+- Additional requirements in `requirements.txt`
+
+## Contributing
+
+1. Fork the repository
+2. Create a feature branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
+
+## Troubleshooting
+
+Common issues and solutions:
+- API rate limiting: Implement proper caching
+- Authentication errors: Check `.env` file and API credentials
+- Module import errors: Ensure correct virtual environment activation
+
+## License
+
+Distributed under the MIT License. See `LICENSE` for more information.
+
+## Acknowledgments
+
+- [Strava API Documentation](https://developers.strava.com/)
+- [Spotify Web API](https://developer.spotify.com/documentation/web-api/)
+- [Chess.com API](https://www.chess.com/news/view/published-data-api)
+- [OpenAI API](https://platform.openai.com/docs/api-reference)
 
 ---
 
