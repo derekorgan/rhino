@@ -1,5 +1,5 @@
 # 🦏 Rhino Workout & Music Tracker 
-###(Playground experiment app) 
+### (Playground experiment app) 
 
 A Flask web application that integrates with Strava, Spotify, and OpenAI to track workouts, music, and with AI-powered insights using OpenAI.
 
