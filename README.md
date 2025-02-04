@@ -247,5 +247,19 @@ Distributed under the MIT License. See `LICENSE` for more information.
 - [Chess.com API](https://www.chess.com/news/view/published-data-api)
 - [OpenAI API](https://platform.openai.com/docs/api-reference)
 
+## Development Setup
+
+### Environment
+- **Operating System**: macOS
+- **IDE**: [Cursor](https://cursor.sh/) - AI-powered code editor
+- **Terminal**: [Warp](https://www.warp.dev/) - Modern terminal with AI capabilities
+- **AI Assistant**: ChatGPT - For code assistance and pair programming
+
+### Getting Started
+1. Clone the repository
+2. Install dependencies: `pip install -r requirements.txt`
+3. Set up your environment variables (see `.env.example`)
+4. Run the application: `python app.py`
+
 ---
 
