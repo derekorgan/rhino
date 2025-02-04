@@ -2,6 +2,6 @@
 .cache
 __pycache__/
 .venv/
-
+.vscode/
 # Ignore macOS system files
 .DS_Store

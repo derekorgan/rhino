@@ -18,6 +18,9 @@ class SpotifyClient:
     def get_recent_tracks(self, limit=50):
         try:
             results = self.sp.current_user_recently_played(limit=limit)
+            if results is None:
+                print("No results returned from Spotify API")
+                return []
             return [format_track_data(item) for item in results['items']]
         except Exception as e:
             print(f"Error getting recent tracks: {e}")

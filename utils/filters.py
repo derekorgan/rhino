@@ -1,6 +1,6 @@
 from datetime import datetime, timedelta
 
-def strftime(date_str, fmt=None):
+def strftime(date_str, fmt='%Y-%m-%d %H:%M:%S'):
     """Convert ISO date string to formatted date string."""
     date = datetime.fromisoformat(date_str.replace('Z', '+00:00'))
     native = date.astimezone()
