@@ -31,7 +31,22 @@ def index():
     activities = strava_client.get_activities()
     tracks = spotify_client.get_recent_tracks()
     
-    # Generate AI workout summary
+    # Group tracks by playlist: If a track has a 'playlist' context, group it under that playlist name.
+    playlist_groups = {}
+    non_playlist_tracks = []
+    for track in tracks:
+        context = track.get('context')
+        if context and context.get('type') == 'playlist':
+            playlist_name = spotify_client.get_playlist_name(track)
+            if not playlist_name:
+                playlist_name = "Unknown Playlist"
+            if playlist_name not in playlist_groups:
+                playlist_groups[playlist_name] = []
+            playlist_groups[playlist_name].append(track)
+        else:
+            non_playlist_tracks.append(track)
+    
+    # Generate AI workout summary with included duration information
     workout_prompt = f"""
     Analyze these recent activities and provide a summary:
     
@@ -40,7 +55,8 @@ def index():
         'name': activity.get('name'),
         'type': activity.get('type'),
         'distance': activity.get('distance'),
-        'date': activity.get('start_date')
+        'start_date': activity.get('start_date'),
+        'duration': activity.get('elapsed_time')
     } for activity in activities]}
     
     Recent tracks played during workouts:
@@ -62,6 +78,8 @@ def index():
         "index.html",
         activities=activities,
         tracks=tracks,
+        playlist_groups=playlist_groups,
+        non_playlist_tracks=non_playlist_tracks,
         ai_summary=ai_summary,
         chess_profile=chess_profile,
         chess_stats=chess_stats,

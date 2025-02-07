@@ -28,7 +28,12 @@
                 {% for activity in activities %}
                     <li>
                         <strong>{{ activity.name }}</strong> - {{ activity.type }}
-                        <br>Distance: {{ (activity.distance / 1000) | round(2) }} km
+                        {% if activity.distance and activity.distance > 0 %}
+                            <br>Distance: {{ (activity.distance / 1000) | round(2) }} km
+                        {% endif %}
+                        {% if activity.formatted_duration %}
+                            <br>Duration: {{ activity.formatted_duration }}
+                        {% endif %}
                         <br>Start Time: {{ activity.start_date | strftime('%B %d, %Y at %I:%M %p') }}
                         
                         {% set activity_tracks = tracks | selecttracks(activity.start_date, activity.elapsed_time) %}
@@ -45,9 +50,31 @@
             </ul>
         </div>
 
-
+        <div class="box">
+            <h2>🎵 Spotify Tracks by Playlist</h2>
+            {% if playlist_groups %}
+                {% for playlist_name, tracks in playlist_groups.items() %}
+                    <h3>{{ playlist_name }}</h3>
+                    <ul class="playlist-tracks">
+                        {% for track in tracks %}
+                            <li>{{ track.name }} by {{ track.artist }}</li>
+                        {% endfor %}
+                    </ul>
+                {% endfor %}
+            {% else %}
+                <p>No tracks from playlists found.</p>
+            {% endif %}
+            
+            {% if non_playlist_tracks %}
+                <h3>Other Tracks</h3>
+                <ul class="playlist-tracks">
+                    {% for track in non_playlist_tracks %}
+                        <li>{{ track.name }} by {{ track.artist }}</li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+        </div>
     </div>
-
 
 </body>
 </html>

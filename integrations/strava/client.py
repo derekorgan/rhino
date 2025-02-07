@@ -1,5 +1,6 @@
 import requests
 from config import STRAVA_CONFIG
+from datetime import timedelta
 
 class StravaClient:
     TOKEN_URL = "https://www.strava.com/oauth/token"
@@ -22,15 +23,29 @@ class StravaClient:
         )
         return response.json().get("access_token")
 
-    def get_activities(self, limit=5):
-        access_token = self.get_access_token()
-        if not access_token:
+    def get_activities(self, per_page=30):
+        url = f"{self.API_BASE}/athlete/activities?per_page={per_page}"
+        headers = {"Authorization": f"Bearer {self.get_access_token()}"}
+        response = requests.get(url, headers=headers)
+        if response.status_code == 200:
+            activities = response.json()
+            for activity in activities:
+                elapsed_time = activity.get("elapsed_time")
+                if elapsed_time is not None:
+                    activity["formatted_duration"] = self.humanize_duration(elapsed_time)
+                else:
+                    activity["formatted_duration"] = ""
+            return activities
+        else:
+            print(f"Error fetching activities: {response.status_code} - {response.text}")
             return []
 
-        headers = {"Authorization": f"Bearer {access_token}"}
-        response = requests.get(
-            f"{self.API_BASE}/athlete/activities",
-            headers=headers,
-            params={"per_page": limit}
-        )
-        return response.json() 
+    def humanize_duration(self, seconds):
+        """Convert seconds to a human-readable format."""
+        total_seconds = int(seconds)
+        hours, remainder = divmod(total_seconds, 3600)
+        minutes, secs = divmod(remainder, 60)
+        if hours > 0:
+            return f"{hours}h {minutes}m {secs}s"
+        else:
+            return f"{minutes}m {secs}s"

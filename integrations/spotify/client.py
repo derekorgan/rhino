@@ -25,3 +25,18 @@ class SpotifyClient:
         except Exception as e:
             print(f"Error getting recent tracks: {e}")
             return []
+
+    def get_playlist_name(self, track):
+        """
+        Given a track from the recently played tracks, this function checks if the track 
+        has a context of type 'playlist' and, if so, retrieves the playlist name by calling
+        the Spotify API.
+        """
+        context = track.get('context')
+        if context and context.get('type') == 'playlist':
+            playlist_uri = context.get('uri')  # e.g., "spotify:playlist:37i9dQZF1DX0XUsuxWHRQd"
+            playlist_id = playlist_uri.split(":")[-1]
+            # Assuming spotify_client has a method to get a playlist's details:
+            playlist_details = self.get_playlist(playlist_id)
+            return playlist_details.get('name')
+        return None
