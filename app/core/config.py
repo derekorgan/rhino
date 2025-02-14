@@ -27,9 +27,6 @@ class Settings(BaseSettings):
     WITHINGS_REDIRECT_URI: Optional[str] = None
     WITHINGS_REFRESH_TOKEN: Optional[str] = None
     
-    # Optional Redis configuration for memory
-    REDIS_URL: Optional[str] = None
-    
     # Templates directory
     TEMPLATES_DIR: str = "app/templates"
     
