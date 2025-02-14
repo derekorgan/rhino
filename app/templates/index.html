@@ -1,51 +1,109 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="dark">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Rhino Dashboard</title>
     <script src="https://cdn.tailwindcss.com"></script>
-</head>
-<body class="bg-gray-100">
-    <div class="container mx-auto px-4 py-8">
-        <!-- Header -->
-        <div class="flex items-center justify-between mb-8">
-            <h1 class="text-4xl font-bold text-gray-800">Rhino Dashboard</h1>
-            <!-- Add logo here if needed -->
-        </div>
+    <script>
+        // Tailwind Dark Mode Configuration
+        tailwind.config = {
+            darkMode: 'class'
+        }
 
+        // Theme toggle function
+        function toggleTheme() {
+            document.documentElement.classList.toggle('dark');
+        }
+    </script>
+</head>
+<body class="bg-gray-100 dark:bg-gray-900 transition-colors duration-200">
+    <!-- Header Bar -->
+    <header class="bg-white dark:bg-gray-800 shadow-md">
+        <div class="container mx-auto px-4 py-4">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center space-x-4">
+                    <img 
+                        src="/static/images/rhino_app_icon.jpg"
+                        alt="Rhino Logo" 
+                        class="h-12 w-12 rounded-full object-cover"
+                    >
+                    <h1 class="text-2xl font-bold text-gray-800 dark:text-white">Rhino Dashboard</h1>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <!-- Theme Toggle Button -->
+                    <button 
+                        onclick="toggleTheme()"
+                        class="p-2 rounded-lg bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-white hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors duration-200"
+                    >
+                        <span class="dark:hidden">🌙</span>
+                        <span class="hidden dark:inline">☀️</span>
+                    </button>
+                    <!-- Navigation -->
+                    <nav class="hidden md:flex space-x-4">
+                        <a href="#" class="text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white">Dashboard</a>
+                        <a href="#" class="text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white">Settings</a>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <div class="container mx-auto px-4 py-8">
         <!-- AI Summary Card -->
-        <div class="bg-white rounded-lg shadow-md p-6 mb-6">
-            <h2 class="text-2xl font-semibold text-gray-800 mb-4">💡 AI Summary</h2>
-            <p class="text-gray-600">{{ ai_summary }}</p>
+        <div class="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6 mb-6">
+            <h2 class="text-2xl font-semibold text-gray-800 dark:text-white mb-4">💡 AI Summary</h2>
+            <p class="text-gray-600 dark:text-gray-300">{{ ai_summary }}</p>
         </div>
 
         <!-- Two Column Layout -->
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
             <!-- Activities Card -->
-            <div class="bg-white rounded-lg shadow-md p-6">
-                <h2 class="text-2xl font-semibold text-gray-800 mb-4">🏃 Activities</h2>
+            <div class="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6">
+                <h2 class="text-2xl font-semibold text-gray-800 dark:text-white mb-4">🏃 Activities</h2>
+                {% if activities %}
                 <ul class="space-y-4">
-                {% for activity in activities %}
-                    <li class="border-b border-gray-200 pb-4">
-                        <div class="font-medium text-gray-800">{{ activity.name }}</div>
-                        {% if activity.distance %}
-                        <div class="text-sm text-gray-600">Distance: {{ activity.distance }}</div>
-                        {% endif %}
+                    {% for activity in activities %}
+                    <li class="border-b border-gray-200 dark:border-gray-700 pb-4 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors duration-200 rounded-lg p-2">
+                        <div class="flex justify-between items-start">
+                            <div class="font-medium text-gray-800 dark:text-white">{{ activity.name }}</div>
+                            {% if activity.formatted_kudos %}
+                            <div class="text-sm text-gray-600 dark:text-gray-400">{{ activity.formatted_kudos }}</div>
+                            {% endif %}
+                        </div>
+                        <div class="text-sm text-gray-600 dark:text-gray-400 mt-1">
+                            {% if activity.distance > 0 %}
+                            <span class="inline-block mr-4">📏 {{ activity.formatted_distance }}</span>
+                            {% endif %}
+                            <span class="inline-block mr-4">⏱️ {{ activity.formatted_duration }}</span>
+                            {% if activity.formatted_heartrate %}
+                            <span class="inline-block mr-4">{{ activity.formatted_heartrate }}</span>
+                            {% endif %}
+                            <span class="inline-block">🏃 {{ activity.type }}</span>
+                        </div>
+                        <div class="text-xs text-gray-500 dark:text-gray-500 mt-1">
+                            {{ activity.formatted_date }}
+                        </div>
                     </li>
-                {% endfor %}
+                    {% endfor %}
                 </ul>
+                {% else %}
+                <div class="text-gray-600 dark:text-gray-400 text-center py-8">
+                    <p>No recent activities found</p>
+                </div>
+                {% endif %}
             </div>
 
             <!-- Tracks Card -->
-            <div class="bg-white rounded-lg shadow-md p-6">
-                <h2 class="text-2xl font-semibold text-gray-800 mb-4">🎵 Tracks</h2>
+            <div class="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6">
+                <h2 class="text-2xl font-semibold text-gray-800 dark:text-white mb-4">🎵 Tracks</h2>
                 <ul class="space-y-4">
                 {% for track in tracks %}
-                    <li class="border-b border-gray-200 pb-4">
-                        <div class="font-medium text-gray-800">{{ track.name }}</div>
+                    <li class="border-b border-gray-200 dark:border-gray-700 pb-4">
+                        <div class="font-medium text-gray-800 dark:text-white">{{ track.name }}</div>
                         {% if track.artist %}
-                        <div class="text-sm text-gray-600">by {{ track.artist }}</div>
+                        <div class="text-sm text-gray-600 dark:text-gray-400">by {{ track.artist }}</div>
                         {% endif %}
                     </li>
                 {% endfor %}
@@ -53,5 +111,25 @@
             </div>
         </div>
     </div>
+
+    <script>
+        // Check for saved theme preference or use system preference
+        if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.classList.add('dark')
+        } else {
+            document.documentElement.classList.remove('dark')
+        }
+
+        // Update toggle function to save preference
+        function toggleTheme() {
+            if (document.documentElement.classList.contains('dark')) {
+                document.documentElement.classList.remove('dark');
+                localStorage.theme = 'light';
+            } else {
+                document.documentElement.classList.add('dark');
+                localStorage.theme = 'dark';
+            }
+        }
+    </script>
 </body>
 </html> 

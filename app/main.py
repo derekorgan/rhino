@@ -12,12 +12,12 @@ app = FastAPI(
     debug=settings.DEBUG
 )
 
-# Calculate the correct static directory path
-current_dir = os.path.dirname(os.path.realpath(__file__))
-# Now the static directory is within the app folder
-static_dir = os.path.join(current_dir, 'static')
+# Mount static files - make sure the directory exists
+static_dir = os.path.join(os.path.dirname(os.path.dirname(__file__)), "app", "static")
+if not os.path.exists(static_dir):
+    os.makedirs(static_dir)
 
-# Mount static files using the correct path
+# Mount the static directory
 app.mount("/static", StaticFiles(directory=static_dir), name="static")
 
 # Initialize templates
