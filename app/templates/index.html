@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rhino Dashboard</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- or -->
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-100">
+    <div class="container mx-auto px-4 py-8">
+        <!-- Header -->
+        <div class="flex items-center justify-between mb-8">
+            <h1 class="text-4xl font-bold text-gray-800">Rhino Dashboard</h1>
+            <!-- Add logo here if needed -->
+        </div>
+
+        <!-- AI Summary Card -->
+        <div class="bg-white rounded-lg shadow-md p-6 mb-6">
+            <h2 class="text-2xl font-semibold text-gray-800 mb-4">💡 AI Summary</h2>
+            <p class="text-gray-600">{{ ai_summary }}</p>
+        </div>
+
+        <!-- Two Column Layout -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <!-- Activities Card -->
+            <div class="bg-white rounded-lg shadow-md p-6">
+                <h2 class="text-2xl font-semibold text-gray-800 mb-4">🏃 Activities</h2>
+                <ul class="space-y-4">
+                {% for activity in activities %}
+                    <li class="border-b border-gray-200 pb-4">
+                        <div class="font-medium text-gray-800">{{ activity.name }}</div>
+                        {% if activity.distance %}
+                        <div class="text-sm text-gray-600">Distance: {{ activity.distance }}</div>
+                        {% endif %}
+                    </li>
+                {% endfor %}
+                </ul>
+            </div>
+
+            <!-- Tracks Card -->
+            <div class="bg-white rounded-lg shadow-md p-6">
+                <h2 class="text-2xl font-semibold text-gray-800 mb-4">🎵 Tracks</h2>
+                <ul class="space-y-4">
+                {% for track in tracks %}
+                    <li class="border-b border-gray-200 pb-4">
+                        <div class="font-medium text-gray-800">{{ track.name }}</div>
+                        {% if track.artist %}
+                        <div class="text-sm text-gray-600">by {{ track.artist }}</div>
+                        {% endif %}
+                    </li>
+                {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </div>
+</body>
+</html> 
