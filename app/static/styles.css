@@ -1,3 +1,128 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Core layout components */
+.header {
+    background-color: rgba(30, 41, 59, 0.5);
+    backdrop-filter: blur(4px);
+}
+
+.header span {
+    color: rgb(209, 213, 219);  /* light gray for dark mode */
+}
+:root:not(.dark) .header span {
+    color: rgb(51, 65, 85);  /* dark gray for light mode */
+}
+
+.nav-link,
+.card-title,
+.activity-item .text-white {
+    color: rgb(209, 213, 219);  /* light gray for dark mode */
+}
+
+/* Light mode overrides */
+:root:not(.dark) .nav-link,
+:root:not(.dark) .card-title,
+:root:not(.dark) .activity-item .text-white {
+    color: rgb(51, 65, 85);  /* dark gray for light mode */
+}
+
+.nav-link:hover {
+    color: white;
+    transition: color 0.2s;
+}
+
+:root:not(.dark) .nav-link:hover {
+    color: rgb(15, 23, 42);  /* darker color for light mode hover */
+}
+
+/* Dashboard cards */
+.dashboard-card {
+    background-color: rgba(30, 41, 59, 0.5);
+    backdrop-filter: blur(4px);
+    border-radius: 0.5rem;
+    padding: 1.5rem;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.card-title {
+    font-size: 1.125rem;
+    font-weight: 500;
+    margin-bottom: 1rem;
+}
+
+/* Activity items */
+.activity-item {
+    border-bottom: 1px solid rgb(51, 65, 85);
+    padding-bottom: 1rem;
+    color: rgb(209, 213, 219);  /* light gray for dark mode */
+}
+:root:not(.dark) .activity-item {
+    color: rgb(51, 65, 85);  /* dark gray for light mode */
+    border-bottom-color: rgb(203, 213, 225);
+}
+.activity-item:last-child {
+    border-bottom: none;
+}
+
+.activity-stats {
+    color: rgb(156, 163, 175);
+    font-size: 0.875rem;
+    margin-top: 0.5rem;
+}
+:root:not(.dark) .activity-stats {
+    color: rgb(71, 85, 105);
+}
+
+.stat-item {
+    display: inline-flex;
+    align-items: center;
+    margin-right: 1rem;
+}
+
+/* Track items */
+.track-item {
+    border-bottom: 1px solid rgb(51, 65, 85);
+    padding-bottom: 1rem;
+    color: rgb(209, 213, 219);  /* light gray for dark mode */
+}
+:root:not(.dark) .track-item {
+    color: rgb(51, 65, 85);  /* dark gray for light mode */
+    border-bottom-color: rgb(203, 213, 225);
+}
+.track-item:last-child {
+    border-bottom: none;
+}
+
+/* AI text formatting */
+.ai-text {
+    white-space: pre-wrap;
+    word-break: break-word;
+    font-weight: normal;
+    line-height: 1.5;
+    color: rgb(209, 213, 219);
+    max-width: 100%;
+    overflow-x: auto;
+}
+
+/* Activity tracks within activities */
+.activity-tracks {
+    margin-top: 0.5rem;
+    margin-left: 1rem;
+    font-size: 0.875rem;
+    color: rgb(156, 163, 175);
+}
+
+.activity-tracks li {
+    margin-top: 0.25rem;
+    margin-bottom: 0.25rem;
+}
+
+.card {
+    @apply bg-slate-800/50 backdrop-blur-sm rounded-lg p-6 shadow-xl hover:bg-slate-700/50 transition-all duration-200;
+}
+
 .logo-container {
     text-align: center;
     margin-top: 20px;
@@ -29,16 +154,6 @@ h1 { color: #333; }
     margin-bottom: 15px;
 }
 
-.ai-text {
-    white-space: pre-wrap;
-    word-wrap: break-word;
-    font-family: inherit;
-    line-height: 1.5;
-    padding: 15px;
-    max-width: 100%;
-    overflow-x: auto;
-}
-
 .activity-tracks {
     margin-top: 5px;
     margin-left: 20px;
@@ -48,4 +163,45 @@ h1 { color: #333; }
 
 .activity-tracks li {
     margin: 3px 0;
+}
+
+/* Basic light/dark mode */
+:root {
+    background-color: rgb(255, 255, 255);
+}
+
+:root.dark {
+    background-color: rgb(15, 23, 42);
+}
+
+/* Light mode overrides */
+:root:not(.dark) .dashboard-card {
+    background-color: rgba(241, 245, 249, 0.8);
+    backdrop-filter: blur(4px);
+}
+
+:root:not(.dark) .header {
+    background-color: rgba(241, 245, 249, 0.8);
+    backdrop-filter: blur(4px);
+}
+
+:root:not(.dark) .activity-item,
+:root:not(.dark) .track-item {
+    border-bottom-color: rgb(203, 213, 225);
+}
+
+:root:not(.dark) .activity-stats {
+    color: rgb(71, 85, 105);
+}
+
+:root:not(.dark) .ai-text {
+    color: rgb(51, 65, 85);
+}
+
+:root:not(.dark) .activity-tracks {
+    color: rgb(71, 85, 105);
+}
+
+:root:not(.dark) .stat-item {
+    color: rgb(71, 85, 105);
 }
