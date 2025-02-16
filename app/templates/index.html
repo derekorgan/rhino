@@ -82,6 +82,8 @@
                             <span class="stat-item">
                                 {% if activity.type == 'Swim' %}🏊
                                 {% elif activity.type == 'WeightTraining' %}🏋️
+                                {% elif activity.type == 'Ride' %}🚴
+                                {% elif activity.type in ['Walk', 'Hike'] %}🚶
                                 {% else %}🏃{% endif %} 
                                 {{ activity.type }}
                             </span>
