@@ -59,19 +59,32 @@
                 <div class="space-y-4">
                     {% for activity in activities %}
                     <div class="activity-item">
-                        <div class="flex justify-between">
-                            <span class="text-white">{{ activity.name }}</span>
-                            <span class="text-gray-400">👍 {{ activity.kudos }}</span>
+                        <div class="flex justify-between items-start">
+                            <div class="text-white">{{ activity.name }}</div>
+                            {% if activity.kudos_count %}
+                            <div class="text-gray-400">👍 {{ activity.kudos_count }}</div>
+                            {% endif %}
                         </div>
                         <div class="activity-stats">
                             {% if activity.distance %}
-                            <span class="stat-item">📏 {{ activity.formatted_distance }}</span>
+                            <span class="stat-item">📏 
+                                {% if activity.type == 'Swim' %}
+                                    {{ activity.distance | int }}m
+                                {% else %}
+                                    {{ activity.formatted_distance }}
+                                {% endif %}
+                            </span>
                             {% endif %}
                             <span class="stat-item">⏱️ {{ activity.formatted_duration }}</span>
                             {% if activity.formatted_heartrate %}
-                            <span class="stat-item"> {{ activity.formatted_heartrate }}</span>
+                            <span class="stat-item">❤️ {{ activity.formatted_heartrate | replace('❤️', '') | replace('♥️', '') }}</span>
                             {% endif %}
-                            <span class="stat-item">🏃 {{ activity.type }}</span>
+                            <span class="stat-item">
+                                {% if activity.type == 'Swim' %}🏊
+                                {% elif activity.type == 'WeightTraining' %}🏋️
+                                {% else %}🏃{% endif %} 
+                                {{ activity.type }}
+                            </span>
                         </div>
                         <div class="text-xs text-gray-500 mt-1">{{ activity.formatted_date }}</div>
                         {% if activity.tracks %}
