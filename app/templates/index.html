@@ -82,8 +82,25 @@
                             <span class="stat-item">
                                 {% if activity.type == 'Swim' %}🏊
                                 {% elif activity.type == 'WeightTraining' %}🏋️
-                                {% elif activity.type == 'Ride' %}🚴
+                                {% elif activity.type in ['Ride', 'VirtualRide'] %}🚴
                                 {% elif activity.type in ['Walk', 'Hike'] %}🚶
+                                {% elif activity.type == 'Golf' %}⛳
+                                {% elif activity.type in ['Canoeing', 'Kayaking'] %}🛶
+                                {% elif activity.type == 'Tennis' %}🎾
+                                {% elif activity.type == 'Football' %}⚽
+                                {% elif activity.type in ['Ski', 'NordicSki', 'AlpineSki'] %}⛷️
+                                {% elif activity.type in ['Run', 'VirtualRun', 'TrailRun'] %}🏃
+                                {% elif activity.type == 'Elliptical' %}🏃
+                                {% elif activity.type == 'Rowing' %}🚣
+                                {% elif activity.type == 'Climbing' %}🧗
+                                {% elif activity.type == 'Snowboarding' %}🏂
+                                {% elif activity.type == 'Surfing' %}🏄
+                                {% elif activity.type == 'Skating' %}🛼
+                                {% elif activity.type == 'Basketball' %}🏀
+                                {% elif activity.type == 'Baseball' %}⚾
+                                {% elif activity.type == 'Gymnastics' %}🤸
+                                {% elif activity.type == 'Volleyball' %}🏐
+                                {% elif activity.type == 'WaterSki' %}🏄
                                 {% else %}🏃{% endif %} 
                                 {{ activity.type }}
                             </span>
