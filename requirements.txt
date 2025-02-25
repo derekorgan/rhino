@@ -11,6 +11,5 @@ langchain-core==0.3.39
 openai==1.64.0
 spotipy==2.25.0
 stravalib==2.2
-email-validator==2.2.0
 watchfiles==1.0.4
 aiohttp==3.11.13
