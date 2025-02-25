@@ -1,11 +1,10 @@
 # 🦏 Rhino Workout & Music Tracker 
 ### (Playground experiment app) 
 
-A Flask web application that integrates with Strava, Spotify, and OpenAI to track workouts, music, and with AI-powered insights using OpenAI.
-
+A FastAPI web application that integrates with Strava, Spotify, and OpenAI to track workouts, music, and provide AI-powered insights.
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/derekorgan/rhino/main/static/images/rhino_app_icon.jpg" width="150" alt="Rhino Dashboard Logo">
+  <img src="https://raw.githubusercontent.com/derekorgan/rhino/main/app/static/images/rhino_app_icon.jpg" width="150" alt="Rhino Dashboard Logo">
 </p>
 
 
@@ -60,11 +59,16 @@ STRAVA_REFRESH_TOKEN="your-strava-refresh-token"
 # Spotify API Credentials
 SPOTIFY_CLIENT_ID="your-spotify-client-id"
 SPOTIFY_CLIENT_SECRET="your-spotify-client-secret"
-SPOTIFY_REDIRECT_URI="http://localhost:5000/callback"
+SPOTIFY_REDIRECT_URI="http://localhost:8000/callback"
 
-# Chess.com API username (optional)  - currently commented out in app.py
+# Chess.com API username (optional)
 CHESS_USERNAME = "your-username"
 
+# Withings settings (optional)
+WITHINGS_CLIENT_ID="your-withings-client-id"
+WITHINGS_CLIENT_SECRET="your-withings-client-secret"
+WITHINGS_REDIRECT_URI="your-withings-redirect-uri"
+WITHINGS_REFRESH_TOKEN="your-withings-refresh-token"
 ```
 
 🚨 **DO NOT** commit this file to GitHub! It contains sensitive information. (.env is part of .gitignore)
@@ -77,10 +81,10 @@ CHESS_USERNAME = "your-username"
 
 1. Go to [Spotify Developer Dashboard](https://developer.spotify.com/dashboard)
 2. Register your app and copy the **Client ID & Secret**
-3. Add `` as a Redirect URI
+3. Add `http://localhost:8000/callback` as a Redirect URI
 4. Run this in your browser:
    ```
-   https://accounts.spotify.com/authorize?client_id=your-client-id&response_type=code&redirect_uri=http://localhost:5000/callback&scope=user-read-recently-played
+   https://accounts.spotify.com/authorize?client_id=your-client-id&response_type=code&redirect_uri=http://localhost:8000/callback&scope=user-read-recently-played
    ```
 5. Copy the **code** from the URL and exchange it for an access token.
 
@@ -112,13 +116,15 @@ CHESS_USERNAME = "your-username"
 
 ## 🛠 4️⃣ Running the App
 
-Start the Flask server:
+Start the FastAPI server:
 
 ```sh
-python app.py
+uvicorn app.main:app --reload
+# or
+python -m app.main
 ```
 
-Then open [**http://127.0.0.1:5000**](http://127.0.0.1:5000) in your browser.
+Then open [**http://127.0.0.1:8000**](http://127.0.0.1:8000) in your browser.
 
 ---
 
@@ -145,7 +151,7 @@ This project is for **personal use** but can be extended collaboratively.
 - Python 3.8 or higher
 - Strava API credentials
 - Spotify Developer account and API credentials
-- Chess.com account (optional) - currently commented out in app.py
+- Chess.com account (optional)
 - OpenAI API key
 
 ## Installation
@@ -167,58 +173,32 @@ source venv/bin/activate  # On Windows: venv\Scripts\activate
 pip install -r requirements.txt
 ```
 
-## Configuration
-
-Create a `.env` file in the root directory with your API credentials:
-
-```env
-# Strava API Credentials
-STRAVA_CLIENT_ID=your_client_id
-STRAVA_CLIENT_SECRET=your_client_secret
-STRAVA_REFRESH_TOKEN=your_refresh_token
-
-# Spotify API Credentials
-SPOTIFY_CLIENT_ID=your_client_id
-SPOTIFY_CLIENT_SECRET=your_client_secret
-SPOTIFY_REDIRECT_URI=your_redirect_uri
-
-# Chess.com Username
-CHESS_USERNAME=your_username
-
-# OpenAI API Key
-OPENAI_API_KEY=your_api_key
-```
-
-## Running the Application
-
-1. Ensure your virtual environment is activated
-2. Run the Flask application:
-```bash
-python3 app.py
-```
-3. Visit `http://localhost:5000` in your web browser
-
 ## Development
 
 ### Project Organization
-- Each integration is modular and contained in its own directory
-- Configuration is centralized in `config.py`
-- Template filters in `utils/filters.py` handle date formatting and track selection
-- Static assets and templates are separated for clean organization
+- The application follows a modern FastAPI structure:
+  - `app/` - Main application package
+  - `app/main.py` - Entry point with FastAPI app initialization
+  - `app/api/` - API routes and endpoints
+  - `app/core/` - Core functionality, configs, and dependencies
+  - `app/models/` - Pydantic models and schemas
+  - `app/services/` - Service integrations (Strava, Spotify, OpenAI)
+  - `app/static/` - Static assets (CSS, images)
+  - `app/templates/` - Jinja2 templates for rendering
 
 ### Adding New Features
-1. Create new integration directories as needed
-2. Update `config.py` with any new API credentials
-3. Add new routes to `app.py`
-4. Create corresponding templates in the `templates` directory
+1. Define Pydantic models in `app/models/`
+2. Implement service logic in `app/services/`
+3. Create API routes in `app/api/routes/`
+4. Add dependencies to `app/core/dependencies.py` if needed
 
 ## Dependencies
 
-- Flask: Web framework
-- Requests: HTTP client for API calls
+- FastAPI: Modern web framework with automatic OpenAPI docs
+- Pydantic: Data validation and settings management
+- Uvicorn: ASGI server for FastAPI
+- Jinja2: Templating engine
 - Python-dotenv: Environment variable management
-- Spotipy: Spotify API client
-- OpenAI: AI integration
 - Additional requirements in `requirements.txt`
 
 ## Contributing
@@ -242,24 +222,10 @@ Distributed under the MIT License. See `LICENSE` for more information.
 
 ## Acknowledgments
 
+- [FastAPI Documentation](https://fastapi.tiangolo.com/)
 - [Strava API Documentation](https://developers.strava.com/)
 - [Spotify Web API](https://developer.spotify.com/documentation/web-api/)
 - [Chess.com API](https://www.chess.com/news/view/published-data-api)
 - [OpenAI API](https://platform.openai.com/docs/api-reference)
 
-## Development Setup
-
-### Environment
-- **Operating System**: macOS
-- **IDE**: [Cursor](https://cursor.sh/) - AI-powered code editor
-- **Terminal**: [Warp](https://www.warp.dev/) - Modern terminal with AI capabilities
-- **AI Assistant**: ChatGPT - For code assistance and pair programming
-
-### Getting Started
-1. Clone the repository
-2. Install dependencies: `pip install -r requirements.txt`
-3. Set up your environment variables (see `.env.example`)
-4. Run the application: `python app.py`
-
 ---
-
