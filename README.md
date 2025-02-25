@@ -1,4 +1,4 @@
-# 🦏 Rhino Workout & Music Tracker 
+# 🦏 Rhino Personal Adaptive Dashboard
 ### (Playground experiment app) 
 
 A FastAPI web application that integrates with Strava, Spotify, and OpenAI to track workouts, music, and provide AI-powered insights.
