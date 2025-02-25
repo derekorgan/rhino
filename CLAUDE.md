@@ -1,11 +1,13 @@
-# CLAUDE.md: Rhino App Development Guidelines
+# CLAUDE.md: Rhino - Personal Dynamic AI Dashboard
+
+## Project Overview
+This is a FastAPI experiment project to build a Personal Dynamic AI Dashboard that integrates various data sources and provides AI-powered insights. The dashboard connects to services like Strava, Spotify, OpenAI, and others to create a comprehensive personal data hub.
 
 ## Application Commands
-- Run Flask app: `python app.py`
-- Run FastAPI app: `python -m app.main` or `uvicorn app.main:app --reload`
+- Run the app: `source env/bin/activate && python -m app.main` or `uvicorn app.main:app --reload`
 - CLI tests:
   - Strava: `python cli-tests/strava_test.py`
-  - Spotify: `python cli-tests/spotify_test.py`
+  - Spotify: `python cli-tests/spotify_test.py` 
   - OpenAI: `python cli-tests/openai_test.py`
   - Chess: `python cli-tests/chess_test.py`
 
@@ -23,8 +25,10 @@
 - **Configuration**: Use pydantic_settings for env variables, never hardcode secrets
 
 ## Development Workflow
-- Focus on the FastAPI app in the app/ directory for new development
+- Use FastAPI's dependency injection pattern for service integrations
+- Build new dashboard widgets as separate components
 - Test API integrations using CLI tests before implementing in main app
 - Use Pydantic for data validation and schema definitions
-- Follow FastAPI dependency injection patterns for services
+- Implement async functionality where appropriate for better performance
 - Handle API errors gracefully with user-friendly messages
+- Consider caching strategies for API rate limits
